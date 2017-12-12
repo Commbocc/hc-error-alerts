@@ -1,6 +1,78 @@
-# hc-error-alerts
+# Hillsborough County Error Alerts
 
 > A Vue.js project
+
+
+* [Vue](https://vuejs.org/)
+* [Vuex](https://vuex.vuejs.org/en/)
+
+## Basic Use
+
+```bash
+npm install --save https://github.com/Commbocc/hc-error-alerts
+```
+
+```js
+// store/index.js
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+import alerts from 'hc-error-alerts/src/store/modules/alerts'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  modules: {
+    alerts
+  }
+})
+```
+
+```js
+// mixins/alertsMixin.js
+import { mapState, mapMutations } from 'vuex'
+
+export default {
+  methods: {
+    ...mapMutations([
+      'addAlert',
+      'clearAlerts'
+    ])
+  },
+  computed: mapState({
+    activeAlerts: state => state.alerts.active
+  })
+}
+```
+
+```vue
+<!-- App.vue -->
+<template>
+  <div>
+    <!-- alerts -->
+    <template v-for="alert in activeAlerts">
+      <div is="Alert" :alert="alert"></div>
+    </template>
+  </div>
+</template>
+
+<script>
+import alertsMixin from './mixins/alertsMixin'
+import Alert from 'hc-error-alerts/src/components/Alert'
+
+export default {
+  components: {
+    Alert
+  },
+  mixins: [alertsMixin],
+  methods: {
+    handleError () {
+      this.addAlert(new Error('The Error Message'))
+    }
+  }
+}
+</script>
+```
 
 ## Build Setup
 
