@@ -1,7 +1,7 @@
 {
   "name": "hc-error-alerts",
   "description": "A Vue.js project",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "author": "Kevin McCarthy <mccarthyk@hcflgov.net>",
   "license": "MIT",
   "private": true,
