@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>hc-error-alerts</title>
+  <link rel="stylesheet" href="https://commbocc.github.io/html-wrapper/static/css/app.css">
+</head>
+<body>
+
+  <section class="py-5">
+    <div class="container">
+
+      <div id="app">
+        <div class="row">
+          <div class="col-md-5">
+
+            <!-- demo -->
+            <button @click="add">Add Alert</button>
+            <button @click="prepend">Prepend Alert</button>
+            <button @click="clear">Clear Alerts</button>
+            <button @click="log">Log in Console</button>
+
+          </div>
+          <div class="col-md-7">
+
+            <div ref="errorAlerts" is="HcErrorAlerts"></div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- include Vue -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- set HcErrorAlerts Vue component -->
+  <script src="build.var.js"></script>
+
+  <script type="text/javascript">
+  'use strict';
+
+  var app = new Vue({
+    el: '#app',
+    components: {
+      HcErrorAlerts: HcErrorAlerts
+    },
+    methods: {
+      add: function add() {
+        this.$refs.errorAlerts.addAlert(new Error(Date.now()));
+      },
+      prepend: function prepend() {
+        this.$refs.errorAlerts.prependAlert(new Error(Date.now()));
+      },
+      clear: function clear() {
+        this.$refs.errorAlerts.clearAlerts();
+      },
+      log: function log() {
+        console.log('All Errors:', this.$refs.errorAlerts.errorLog);
+        console.log('Active Errors:', this.$refs.errorAlerts.activeErrors);
+      }
+    },
+    mounted: function mounted() {
+      this.$refs.errorAlerts.addAlert(new Error('A test error has occured @ ' + Date.now()));
+    }
+  });
+  </script>
+
+</body>
+</html>
