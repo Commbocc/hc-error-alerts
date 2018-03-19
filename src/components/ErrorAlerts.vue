@@ -32,11 +32,14 @@ export default {
     removeAlert (alert) {
       this.errorLog.find(a => a === alert).active = false
     },
-    clearAlerts () {
+    hideAlerts () {
       this.errorLog.map(e => {
         e.active = false
         return e
       })
+    },
+    clearAlerts () {
+      this.errorLog = []
     }
   }
 }
