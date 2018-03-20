@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="alert alert-dismissible fade show" :class="alert.alertClass" role="alert">
+  <div class="alert alert-dismissible show" :class="alert.alertClass" role="alert">
 
     {{ alert.message }}
 
